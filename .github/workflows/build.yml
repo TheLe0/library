@@ -22,11 +22,11 @@ jobs:
       with:
         python-version: ${{ matrix.python-version }}
     - name: Create env file
-        run: |
-          cd ./libapi/libapi
-          touch .env
-          echo SECRET_KEY=${{ secrets.SECRET_KEY }} >> .env
-          cat .env
+      run: |
+        cd ./libapi/libapi
+        touch .env
+        echo SECRET_KEY=${{ secrets.SECRET_KEY }} >> .env
+        cat .env
     - name: Install Dependencies
       run: |
         python -m pip install --upgrade pip
