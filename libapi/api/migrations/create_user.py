@@ -4,8 +4,7 @@ import django.db.models.deletion
 from libapi.helpers import create_super_user
 
 def create_user(apps, schema_editor):
-    pass
-	### create_super_user()
+    create_super_user()
 
 
 class Migration(migrations.Migration):

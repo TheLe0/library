@@ -21,6 +21,7 @@ def create_super_user():
     superuser.username = env('USERNAME')
     superuser.email = env('EMAIL')
     superuser.set_password(env('PASSWORD'))
+    superuser.last_login = datetime.datetime.now()
     superuser.save()
 
 def import_authors():
