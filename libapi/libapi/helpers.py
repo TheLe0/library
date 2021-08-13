@@ -2,6 +2,8 @@ import csv
 import os
 import environ
 
+from django.utils import timezone
+
 env = environ.Env(
     DEBUG=(bool, False)
 )
@@ -21,7 +23,7 @@ def create_super_user():
     superuser.username = env('USERNAME')
     superuser.email = env('EMAIL')
     superuser.set_password(env('PASSWORD'))
-    superuser.last_login = datetime.datetime.now()
+    superuser.last_login = timezone.now()
     superuser.save()
 
 def import_authors():
