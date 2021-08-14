@@ -1,10 +1,10 @@
-from django.db import migrations, models
-import django.db.models.deletion
+from django.db import migrations
 
 from libapi.helpers import import_authors
 
+
 def create_authors(apps, schema_editor):
-	import_authors()
+    import_authors()
 
 
 class Migration(migrations.Migration):

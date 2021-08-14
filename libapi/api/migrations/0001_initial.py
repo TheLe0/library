@@ -7,6 +7,20 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     initial = True
+    ID_PK = models.BigAutoField(
+        auto_created=True,
+        primary_key=True,
+        serialize=False,
+        verbose_name='ID'
+    )
+    AUTHOR_FK = models.ForeignKey(
+        on_delete=django.db.models.deletion.CASCADE,
+        to='api.author'
+    )
+    BOOK_FK = models.ForeignKey(
+        on_delete=django.db.models.deletion.CASCADE,
+        to='api.book'
+    )
 
     dependencies = [
     ]
@@ -15,14 +29,14 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Author',
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('id', ID_PK),
                 ('name', models.CharField(max_length=35)),
             ],
         ),
         migrations.CreateModel(
             name='Book',
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('id', ID_PK),
                 ('title', models.CharField(max_length=45)),
                 ('edition', models.CharField(max_length=15)),
                 ('publication_year', models.IntegerField()),
@@ -31,9 +45,9 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='BookAuthor',
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('author', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='api.author')),
-                ('book', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='api.book')),
+                ('id', ID_PK),
+                ('author', AUTHOR_FK),
+                ('book', BOOK_FK),
             ],
         ),
     ]

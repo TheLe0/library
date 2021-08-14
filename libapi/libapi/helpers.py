@@ -2,7 +2,11 @@ import csv
 import os
 import environ
 
+from api.models import Author
+from django.conf import settings
+from django.contrib.auth.models import User
 from django.utils import timezone
+
 
 env = environ.Env(
     DEBUG=(bool, False)
@@ -10,10 +14,8 @@ env = environ.Env(
 
 environ.Env.read_env()
 
-from django.conf import settings
-from django.contrib.auth.models import User
+PATH = '../data/authors.csv'
 
-from api.models import Author
 
 def create_super_user():
     superuser = User()
@@ -26,9 +28,10 @@ def create_super_user():
     superuser.last_login = timezone.now()
     superuser.save()
 
+
 def import_authors():
 
-    with open(os.path.join(settings.BASE_DIR, '../data/authors.csv')) as csvfile:
+    with open(os.path.join(settings.BASE_DIR, PATH)) as csvfile:
         reader = csv.DictReader(csvfile)
         for row in reader:
             create_author(row['name'])

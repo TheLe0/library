@@ -1,7 +1,7 @@
-from django.db import migrations, models
-import django.db.models.deletion
+from django.db import migrations
 
 from libapi.helpers import create_super_user
+
 
 def create_user(apps, schema_editor):
     create_super_user()

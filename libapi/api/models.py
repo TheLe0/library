@@ -1,10 +1,12 @@
 from django.db import models
 
+
 class Author(models.Model):
-    name = models.CharField(max_length=35) 
+    name = models.CharField(max_length=35)
 
     def __str__(self):
-        return self.name  
+        return self.name
+
 
 class Book(models.Model):
     title = models.CharField(max_length=45)
@@ -13,6 +15,7 @@ class Book(models.Model):
 
     def __str__(self):
         return self.title
+
 
 class BookAuthor(models.Model):
 
