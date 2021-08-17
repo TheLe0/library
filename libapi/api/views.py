@@ -1,7 +1,9 @@
 from django.contrib.auth.models import User, Group
 from rest_framework import viewsets
 from rest_framework import permissions
-from .serializers import UserSerializer, GroupSerializer
+from .serializers import UserSerializer, GroupSerializer, AuthorSerializer
+from .models import Author
+from .pagination import StandardResultsSetPagination
 
 
 class UserViewSet(viewsets.ModelViewSet):
@@ -10,6 +12,7 @@ class UserViewSet(viewsets.ModelViewSet):
     """
     queryset = User.objects.all().order_by('-date_joined')
     serializer_class = UserSerializer
+    pagination_class = StandardResultsSetPagination
     permission_classes = [permissions.IsAuthenticated]
 
 
@@ -19,4 +22,15 @@ class GroupViewSet(viewsets.ModelViewSet):
     """
     queryset = Group.objects.all()
     serializer_class = GroupSerializer
+    pagination_class = StandardResultsSetPagination
+    permission_classes = [permissions.IsAuthenticated]
+
+
+class AuthorViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that list all authors.
+    """
+    queryset = Author.objects.all()
+    serializer_class = AuthorSerializer
+    pagination_class = StandardResultsSetPagination
     permission_classes = [permissions.IsAuthenticated]
