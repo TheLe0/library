@@ -3,10 +3,12 @@ from django.contrib import admin
 from rest_framework import routers
 from api import views
 
+
 router = routers.DefaultRouter()
 router.register(r'users', views.UserViewSet)
 router.register(r'groups', views.GroupViewSet)
-router.register(r'authors', views.AuthorViewSet)
+router.register(r'authors', views.AuthorViewSet, basename='author')
+router.register(r'authors/<int:pk>', views.AuthorViewSet, basename='author')
 
 REST_FRAMEWORK = 'rest_framework'
 # Wire up our API using automatic URL routing.
