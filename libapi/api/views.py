@@ -1,11 +1,16 @@
 from django.contrib.auth.models import User, Group
-from django.shortcuts import get_object_or_404
+from django_filters import rest_framework as filters
 from rest_framework import viewsets
 from rest_framework import permissions
-from rest_framework.response import Response
 from .serializers import UserSerializer, GroupSerializer, AuthorSerializer
 from .models import Author
 from .pagination import StandardResultsSetPagination
+
+
+class AuthorFilter(filters.FilterSet):
+    class Meta:
+        model = Author
+        fields = ['name']
 
 
 class UserViewSet(viewsets.ModelViewSet):
@@ -30,20 +35,13 @@ class GroupViewSet(viewsets.ModelViewSet):
 
 class AuthorViewSet(viewsets.ModelViewSet):
 
-    serializer_class = AuthorSerializer
-    pagination_class = StandardResultsSetPagination
-    permission_classes = [permissions.IsAuthenticated]
-
     """
     API endpoint that list all authors.
     """
-    def list(self, request):
-        queryset = Author.objects.all()
-        serializer = AuthorSerializer(queryset, many=True)
-        return Response(serializer.data)
-
-    def retrieve(self, request, pk=None):
-        queryset = Author.objects.all()
-        author = get_object_or_404(queryset, pk=pk)
-        serializer = AuthorSerializer(author)
-        return Response(serializer.data)
+    queryset = Author.objects.all()
+    serializer = AuthorSerializer(queryset, many=True)
+    serializer_class = AuthorSerializer
+    pagination_class = StandardResultsSetPagination
+    permission_classes = [permissions.IsAuthenticated]
+    filter_backends = (filters.DjangoFilterBackend,)
+    filterset_class = AuthorFilter
