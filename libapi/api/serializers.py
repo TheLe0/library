@@ -16,12 +16,18 @@ class GroupSerializer(serializers.HyperlinkedModelSerializer):
 
 
 class AuthorSerializer(serializers.HyperlinkedModelSerializer):
+    
+    def to_representation(self, value):
+         return value.name
+
     class Meta:
         model = Author
         fields = ['name']
 
 
 class BookSerializer(serializers.HyperlinkedModelSerializer):
+    authors = AuthorSerializer(read_only=True, many=True)
+
     class Meta:
         model = Book
-        fields = ['title', 'edition', 'publication_year']
+        fields = ['title', 'edition', 'publication_year', 'authors']

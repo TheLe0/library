@@ -42,12 +42,4 @@ class Migration(migrations.Migration):
                 ('publication_year', models.IntegerField()),
             ],
         ),
-        migrations.CreateModel(
-            name='BookAuthor',
-            fields=[
-                ('id', ID_PK),
-                ('author', AUTHOR_FK),
-                ('book', BOOK_FK),
-            ],
-        ),
     ]

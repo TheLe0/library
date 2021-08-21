@@ -15,6 +15,7 @@ class Book(models.Model):
     title = models.CharField(max_length=45)
     edition = models.CharField(max_length=15)
     publication_year = models.IntegerField()
+    authors = models.ManyToManyField(Author)
 
     class Meta:
         ordering = ['publication_year', 'title']
@@ -22,11 +23,3 @@ class Book(models.Model):
     def __str__(self):
         return self.title
 
-
-class BookAuthor(models.Model):
-
-    book = models.ForeignKey('api.Book', on_delete=models.CASCADE)
-    author = models.ForeignKey('api.Author', on_delete=models.CASCADE)
-
-    def __str__(self):
-        return self.book.title+" - "+self.author.name
