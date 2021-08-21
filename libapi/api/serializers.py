@@ -16,9 +16,9 @@ class GroupSerializer(serializers.HyperlinkedModelSerializer):
 
 
 class AuthorSerializer(serializers.HyperlinkedModelSerializer):
-    
+
     def to_representation(self, value):
-         return value.name
+        return value.name
 
     class Meta:
         model = Author
