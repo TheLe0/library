@@ -39,7 +39,7 @@ source venv/bin/activate
 
 2. In ``` ./libapi/libapi/ ``` folder, create a ``` .env ``` file, to put the enviroment variables that you are going to need to run.
 
-```
+```bash
 SECRET_KEY=
 USERNAME=
 EMAIL=
@@ -54,7 +54,7 @@ Where:
 3. The file ``` ./data/authors.csv ```, is a list of authors to create on the database, this is done during the migration.
 The CSV file will have the following format:
 
-```
+```csv
 name
 Luciano Ramalho
 Osvaldo Santana Neto
@@ -66,19 +66,19 @@ J.K Rowling
 
 4. Install the dependencies for the project, on ``` requirements.txt ```, with the following command:
 
-```pycon
+```bash
 pip install -r requirements.txt
 ```
 
 5. Do the migrations for create the local database. You need to be in this directory ``` ./libapi ``` 
 
-```pycon
+```bash
 python manage.py migrate
 ```
 
 6. And finally your project is ready to go, now you only need to start the webserver:
 
-```pycon
+```bash
 python manage.py runserver 
 ```
 > Note:
@@ -106,7 +106,7 @@ All the endpoints are:
 * **books/** - Create a new book
 
 Input JSON:
-```
+```json
 {
  "name": // Name of the book;
  "edition": // Edition number;
@@ -124,7 +124,7 @@ Input JSON:
 * **books/** - Update a book data by its id
 
 Input JSON:
-```
+```json
 {
  "name": // Name of the book;
  "edition": // Edition number;
