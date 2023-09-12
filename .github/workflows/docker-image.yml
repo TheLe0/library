@@ -19,15 +19,10 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Make envfile
-      uses: SpicyPizza/create-envfile@v2.0
-      with:
-        envkey_SECRET_KEY: ${{ secrets.SECRET_KEY }}
-        envkey_USERNAME: ${{ vars.USERNAME }}
-        envkey_EMAIL: ${{ vars.EMAIL }}
-        envkey_PASSWORD: ${{ vars.PASSWORD }}
-        directory: ${{ github.workspace }}/libapi/libapi
-        file_name: .env
-        fail_on_empty: false
-        sort_keys: false
+      run:  |
+          echo "SECRET_KEY=${{ secrets.SECRET_KEY }}" >> ${{ github.workspace }}/libapi/libapi/.env
+          echo "USERNAME=${{ secrets.USERNAME }}" >> ${{ github.workspace }}/libapi/libapi/.env
+          echo "EMAIL=${{ secrets.EMAIL }}" >> ${{ github.workspace }}/libapi/libapi/.env
+          echo "PASSWORD=${{ secrets.PASSWORD }}" >> ${{ github.workspace }}/libapi/libapi/.env
     - name: Build the Docker image
       run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
