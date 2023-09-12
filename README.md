@@ -18,6 +18,8 @@ This project was built with:
 
 ## Setup and Installation
 
+## Run locally
+
 1. First create a virtualenv on the project root
 
 ```pycon
@@ -83,6 +85,32 @@ python manage.py runserver
 ```
 > Note:
 > This will start the server on the defaults hostname and port. If you want to specify where the server is going to point, in the end of the command put ``` YOUR_HOSTNAME:YOUR_PORT```
+
+
+## Run on Docker
+
+You only need to have docker installed on your machine, dont need python or virtuaenv installed to run.
+
+1. First build the image:
+
+```bash
+docker build -t libapi:1.0.0 .
+```
+
+2. Create a <b>.env</b> file on your current directory with the following keys:
+
+```bash
+SECRET_KEY=
+USERNAME=
+EMAIL=
+PASSWORD=
+```
+
+3. Now you can run the container:
+
+```bash
+ docker run -it -p 8000:8000 --env-file ./.env  libapi:1.0.0
+```
 
 ## Endpoints ##
 
